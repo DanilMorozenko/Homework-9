@@ -13,6 +13,7 @@ class SummaryListViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -42,15 +43,15 @@ class SummaryListViewController: UITableViewController {
       
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryData", for: indexPath)
-            let person = personSummary[indexPath.row]
+            let person = personSummary[0]
          
             var content = cell.defaultContentConfiguration()
             
             if indexPath.row == 0 {
-                content.text = "\(person.name)"
+                content.text = "📞 \(person.phone)"
                 cell.contentConfiguration = content
             } else {
-                content.text = "\(person.surname)"
+                content.text = "💌 \(person.mail)"
                 cell.contentConfiguration = content
             }
             
@@ -58,23 +59,59 @@ class SummaryListViewController: UITableViewController {
             
         } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryData", for: indexPath)
-            let person = personSummary[indexPath.row]
+            let person = personSummary[1]
+         
             var content = cell.defaultContentConfiguration()
-            content.text = "\(person.surname)"
-            cell.contentConfiguration = content
+            
+            if indexPath.row == 0 {
+                content.text = "📞 \(person.phone)"
+                cell.contentConfiguration = content
+            } else {
+                content.text = "💌 \(person.mail)"
+                cell.contentConfiguration = content
+            }
+            
+            
             return cell
             
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "summaryData", for: indexPath)
-            let person = personSummary[indexPath.row]
+            let person = personSummary[2]
+         
             var content = cell.defaultContentConfiguration()
-            content.text = "\(person.phone)"
-            cell.contentConfiguration = content
+            
+            if indexPath.row == 0 {
+                content.text = "📞 \(person.phone)"
+                cell.contentConfiguration = content
+            } else {
+                content.text = "💌 \(person.mail)"
+                cell.contentConfiguration = content
+            }
+            
             return cell
         }
     }
     
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 
+        if section == 0 {
+            let person = personSummary [0]
+            return "\(person.name) \(person.surname)"
+        } else if section == 1 {
+            let person = personSummary [1]
+            return "\(person.name) \(person.surname)"
+        } else {
+            let person = personSummary [2]
+            return "\(person.name) \(person.surname)"
+        }
+    }
+
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
